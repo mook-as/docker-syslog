@@ -1,6 +1,3 @@
 FROM colstrom/alpine
-ADD syslog.sh /usr/local/bin/syslog
-RUN chmod a+x /usr/local/bin/syslog
-
-EXPOSE 514/udp
-ENTRYPOINT ["syslog"]
+EXPOSE 514/tcp
+ENTRYPOINT ["/usr/bin/nc", "-lk", "-p", "514", "-e", "/usr/bin/logger", "-s", "-t", ""]
